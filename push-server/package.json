@@ -1,0 +1,9 @@
+{
+  "name": "arts-push-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Free Vercel serverless function that sends ARTS push notifications via Firebase Admin SDK — no Blaze plan required.",
+  "dependencies": {
+    "firebase-admin": "^12.1.0"
+  }
+}

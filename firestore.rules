@@ -1,0 +1,162 @@
+rules_version = '2';
+
+// ARTS — Cloud Firestore Security Rules
+// Updated: 2026-11-04
+//
+// Changes from previous version:
+//   * "Emergency" added as a valid incident status on create (the AI assistant
+//     now classifies panic reports as type "Emergency").
+//   * contractedServices write rule tightened: admins only, never the app itself.
+//   * Added explicit deny-all fallback at the bottom so any collection not
+//     listed here is blocked by default rather than by implicit rule absence.
+//   * Comment updated throughout for clarity.
+// ------------------------------------------------------------------
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ----------------------------------------------------------------
+    // Helper functions
+    // ----------------------------------------------------------------
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return signedIn()
+          && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Validates that a create/update does not change the reporterId after
+    // the document is first written — prevents a user from reassigning
+    // someone else's incident to themselves.
+    function reporterUnchanged() {
+      return request.resource.data.reporterId == resource.data.reporterId;
+    }
+
+    // ----------------------------------------------------------------
+    // Admin registry
+    // Written manually in the Firebase console only. Never by the app.
+    // A user can read their own entry to discover whether they have
+    // admin access; no one else can list or write here.
+    // ----------------------------------------------------------------
+    match /admins/{uid} {
+      allow get:          if isOwner(uid);
+      allow list, write:  if false;
+    }
+
+    // ----------------------------------------------------------------
+    // User profiles
+    // ----------------------------------------------------------------
+    match /users/{uid} {
+      allow get:    if isOwner(uid) || isAdmin();
+      allow list:   if isAdmin();
+      // FIX: admins can also create a user document (not just the owner) —
+      // the website's "Load demo data" button writes fixed-id sample user
+      // profiles as the signed-in administrator, who is never the owner of
+      // those documents. Without this, demo data seeding fails outright.
+      allow create: if isOwner(uid) || isAdmin();
+      allow update: if isOwner(uid) || isAdmin();
+      allow delete: if isAdmin();
+
+      // TOTP secret and biometric settings.
+      // Owner read/write only — not even admins can read a user's 2FA secret.
+      match /private/{document} {
+        allow read, write: if isOwner(uid);
+      }
+
+      // Per-user alert messages (Alerts screen).
+      // The owner reads, updates (marks read), and deletes their own alerts.
+      // Admins and the owner can create alerts (e.g. admin status update,
+      // or the app creating its own confirmation alert after a report).
+      match /alerts/{alertId} {
+        allow read, update, delete: if isOwner(uid);
+        allow create:               if isOwner(uid) || isAdmin();
+      }
+    }
+
+    // ----------------------------------------------------------------
+    // Incidents
+    //
+    // get  — a user can fetch a specific incident if it belongs to them,
+    //         or if they are an admin.
+    // list — any signed-in user can list incidents. The community feed
+    //         uses this with no filter; My Reports uses whereEqualTo on
+    //         reporterId. Both are covered.
+    // create — a user may only create incidents attributed to their own
+    //          UID, with an accepted initial status and type.
+    // update — only admins (e.g. the companion website changing status
+    //          to Resolved). The app itself never updates incidents.
+    // delete — only admins.
+    // ----------------------------------------------------------------
+    match /incidents/{incidentId} {
+
+      allow get: if signedIn()
+                 && (resource.data.reporterId == request.auth.uid || isAdmin());
+
+      allow list: if signedIn();
+
+      allow create: if signedIn()
+                    && request.resource.data.reporterId == request.auth.uid
+                    && request.resource.data.status in ['Pending', 'Forwarded']
+                    && request.resource.data.type in [
+                         // FIX: the app always converts "Pedestrian" to
+                         // "Pedestrian Incident" right before writing to
+                         // Firestore (see ReportAccidentFragment.kt and
+                         // VoiceReportFragment.kt) — this whitelist previously
+                         // said 'Pedestrian', which never matched the actual
+                         // value written, so every pedestrian incident report
+                         // was silently rejected with PERMISSION_DENIED.
+                         'Collision', 'Pedestrian Incident', 'Breakdown', 'Emergency'
+                       ];
+
+      allow update: if isAdmin();
+
+      allow delete: if isAdmin();
+    }
+
+    // ----------------------------------------------------------------
+    // Contracted emergency services
+    // Any signed-in user can read the services list (Nearby Units screen).
+    // Only admins can create, update, or delete service records.
+    // ----------------------------------------------------------------
+    match /contractedServices/{serviceId} {
+      allow read:                        if signedIn();
+      allow create, update, delete:      if isAdmin();
+    }
+
+    // ----------------------------------------------------------------
+    // Dispatch log
+    // Written by the app when a report is submitted (batch write).
+    // Read and managed by admins only (the companion website dashboard).
+    // ----------------------------------------------------------------
+    match /dispatchLog/{entryId} {
+      allow create:               if signedIn();
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ----------------------------------------------------------------
+    // Admin notification queue
+    // Written by the app when a user submits a report.
+    // Read and managed by admins only.
+    // ----------------------------------------------------------------
+    match /notifications/{notificationId} {
+      allow create:               if signedIn();
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ----------------------------------------------------------------
+    // Explicit deny-all fallback
+    // Any collection not listed above is blocked. This makes the rules
+    // fail-closed rather than relying on implicit rule absence.
+    // ----------------------------------------------------------------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

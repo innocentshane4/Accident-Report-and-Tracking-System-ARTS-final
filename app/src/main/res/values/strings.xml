@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ARTS</string>
+    <string name="app_subtitle">Accident Report &amp; Tracking System</string>
+
+    <!-- Auth -->
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_subtitle">Sign in to stay safe</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or">or</string>
+    <string name="biometric_login">Biometric Login</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_in_up_prompt">Don\'t have an account? Sign Up</string>
+    <string name="sign_up">Sign Up</string>
+
+    <!-- Register -->
+    <string name="create_account">Create Account</string>
+    <string name="join_network">Join ARTS safety network</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="already_have_account">Already have an account?</string>
+
+    <!-- Home -->
+    <string name="stay_safe">Stay Safe, %1$s</string>
+    <string name="home_subtitle">Real-time accident reporting &amp; tracking</string>
+    <string name="all_clear">All Clear</string>
+    <string name="no_incidents">No incidents in your area</string>
+    <string name="safety_score">Safety Score</string>
+    <string name="quick_actions">QUICK ACTIONS</string>
+    <string name="report_accident">Report Accident</string>
+    <string name="track_incidents">Track Incidents</string>
+    <string name="emergency_help">Emergency Help</string>
+    <string name="ai_assistant">AI Assistant</string>
+    <string name="features">FEATURES</string>
+    <string name="voice_report">Voice Report</string>
+    <string name="speak_to_report">Speak to report</string>
+    <string name="weather_alert">Weather Alert</string>
+    <string name="current_conditions">Current conditions</string>
+    <string name="community">Community</string>
+    <string name="safety_feed">Safety feed</string>
+    <string name="recent_incidents">RECENT INCIDENTS</string>
+    <string name="incident_map">INCIDENT MAP</string>
+    <string name="nearby_units">Nearby Units</string>
+    <string name="helplines">Helplines</string>
+    <string name="quick_dial">Quick dial</string>
+    <string name="units_active">3 units active</string>
+    <string name="live">Live</string>
+
+    <!-- Incidents -->
+    <string name="incidents">Incidents</string>
+    <string name="search_incidents">Search incidents...</string>
+    <string name="all">All</string>
+    <string name="pending">Pending</string>
+    <string name="in_progress">Forwarded</string>
+    <string name="resolved">Resolved</string>
+    <string name="reported">Reported</string>
+    <string name="responding">Responding</string>
+
+    <!-- Notifications -->
+    <string name="notifications">Notifications</string>
+
+    <!-- Profile &amp; Security -->
+    <string name="profile">Profile</string>
+    <string name="reports">Reports</string>
+    <string name="notification_settings">Notifications</string>
+    <string name="push_alerts">Push alerts, sounds</string>
+    <string name="privacy">Privacy</string>
+    <string name="location_sharing">Location sharing, data</string>
+    <string name="language">Language</string>
+    <string name="english_us">English (US)</string>
+    <string name="security">Security</string>
+    <string name="biometric_2fa">Biometric, 2FA</string>
+    <string name="my_reports">My Reports</string>
+    <string name="logout_title">Logout</string>
+    <string name="logout_message">Are you sure you want to logout?</string>
+    <string name="logout_confirm">Logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="security_title">Security</string>
+    <string name="biometric_unlock">Biometric Unlock</string>
+    <string name="totp_auth">Two-Factor Authentication (TOTP)</string>
+    <string name="toast_2fa_disabled">2FA disabled</string>
+    <string name="toast_2fa_enabled">2FA enabled</string>
+    <string name="toast_2fa_error">That code didn\'t match — 2FA was not enabled</string>
+    <string name="toast_biometric_disabled">Biometric unlock disabled</string>
+    <string name="toast_biometric_enabled">Biometric unlock enabled</string>
+    <string name="error_uid_missing">Couldn\'t identify your account, please try again</string>
+    <string name="error_biometric_not_enrolled">No fingerprint/face set up on this device yet. Add one in your phone\'s settings first.</string>
+    <string name="error_biometric_unsupported">This device doesn\'t support biometric login</string>
+    <string name="msg_2fa_on">2FA is currently ON for your account. Turn it off?</string>
+    <string name="btn_turn_off">Turn Off</string>
+    <string name="msg_2fa_setup">Add this key to your authenticator app (Google Authenticator, Authy, etc):\n\n%1$s\n\nThen tap Continue and enter the 6-digit code it shows.</string>
+    <string name="continue_label">Continue</string>
+    <string name="title_2fa_confirm">Confirm 2FA Setup</string>
+    <string name="hint_2fa_code">6-digit code</string>
+    <string name="confirm">Confirm</string>
+    <string name="msg_biometric_on">Biometric unlock is currently ON for this account on this phone. Turn it off?</string>
+    <string name="title_enable_biometric">Enable Biometric Unlock</string>
+    <string name="msg_enable_biometric">Use your fingerprint or face to open ARTS next time you launch it?</string>
+    <string name="enable">Enable</string>
+    <string name="title_confirm_biometric">Confirm Biometric Unlock</string>
+    <string name="subtitle_confirm_biometric">Verify it\'s you to enable this feature</string>
+    <string name="totp_title">Two-Factor Authentication</string>
+    <string name="setup_2fa_title">Set Up 2FA</string>
+
+    <!-- Voice Report Status -->
+    <string name="status_listening">Listening... speak now</string>
+    <string name="status_processing">Processing...</string>
+    <string name="status_ready_submit">Tap Submit to send or Record to try again</string>
+    <string name="status_did_not_catch">Did not catch that. Tap Record to try again.</string>
+    <string name="btn_stop">Stop</string>
+    <string name="btn_record">Record</string>
+    <string name="btn_record_again">Record again</string>
+    <string name="toast_record_first">Record something first</string>
+    <string name="toast_voice_report_submitted">Voice report submitted</string>
+    <string name="toast_failed_to_submit">Failed to submit: %1$s</string>
+    <string name="location_unavailable">Location unavailable</string>
+    <string name="location_format">%1$.4f, %2$.4f</string>
+
+    <!-- AI Assistant -->
+    <string name="ai_welcome">Hello! I\'m your ARTS AI Assistant. How can I help you today?\n\nYou can describe an accident, ask about road safety, or report an emergency.</string>
+    <string name="ai_thinking">Thinking…</string>
+    <string name="ai_error">I\'m having trouble connecting to my brain right now. If this is an emergency, please call 112.</string>
+    <string name="ai_sos_dispatching">Initiating emergency report. Locating you now...</string>
+    <string name="ai_sos_gps_error">Could not get your GPS location. Please call 112 directly.</string>
+    <string name="ai_sos_sent">SOS Sent! Help is being dispatched to %1$s. Please stay calm and stay on the line if emergency services call you.</string>
+    <string name="ai_listening">Listening...</string>
+    <string name="ai_timeout">Voice input timed out</string>
+    <string name="ai_local_mode_reply">I\'m working in local mode. I\'ve noted a %1$s with %2$s priority.</string>
+    <string name="ai_trouble_connecting">I\'m having a little trouble connecting right now, but I\'ve processed your message locally.</string>
+    <string name="ai_understand">I understand. Please tell me more.</string>
+    <string name="ai_listening_how_help">I\'m listening. How can I help?</string>
+    <string name="ai_help_tell_more">I\'m here to help. Could you tell me more about what happened?</string>
+
+    <!-- Report Accident -->
+    <string name="msg_location_off">Location is off. You can still tap the map to place the pin.</string>
+    <string name="msg_write_more_detail">Write a bit more detail first, then try AI Assist</string>
+    <string name="ai_analysis_complete">AI analysis complete. Please review details.</string>
+    <string name="ai_unavailable">AI Assist unavailable: %1$s</string>
+    <string name="ai_btn_label">AI Assist: clean up &amp; suggest priority</string>
+    <string name="error_enter_location">Please enter the location</string>
+    <string name="error_enter_description">Please describe the incident</string>
+    <string name="map_pinned_at">Pinned at %1$.4f, %2$.4f</string>
+    <string name="toast_saved_offline">Saved on this phone. It will be sent when you are back online.</string>
+    <string name="toast_submitted_dispatched">Report submitted. Emergency services notified.</string>
+    <string name="toast_submitted_success">Report submitted successfully.</string>
+    <string name="still_finding_location">Still finding your location. Please wait.</string>
+
+    <!-- Settings and Photo -->
+    <string name="error_image_read">Couldn\'t read that image, please try another</string>
+    <string name="toast_photo_updated">Profile photo updated</string>
+    <string name="error_photo_save">Couldn\'t save your photo: %1$s</string>
+    <string name="error_photo_too_large">This photo is too large to save. Please try a smaller one.</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="enter_full_name">Enter your full name</string>
+    <string name="profile_not_loaded">Profile is not loaded yet. Please wait.</string>
+    <string name="theme_light_only">ARTS uses a light theme only</string>
+
+    <!-- Bottom Nav -->
+    <string name="nav_home">Home</string>
+    <string name="nav_incidents">Incidents</string>
+    <string name="nav_alerts">Alerts</string>
+    <string name="nav_profile">Profile</string>
+    <!-- General error strings -->
+    <string name="error_invalid_qr">That QR code is not a recognised incident code.</string>
+    <string name="error_location_permission">Location permission is needed to send your position.</string>
+
+    <!-- AI Assistant strings -->
+    <string name="aria_name">Aria — ARTS Assistant</string>
+    <string name="aria_subtitle">Online · Here to help</string>
+    <string name="aria_typing">Aria is typing…</string>
+    <string name="hint_type_message">Type a message…</string>
+    <string name="hint_listening">Listening…</string>
+    <string name="mic_permission_needed">Microphone access is needed for voice input.</string>
+    <string name="error_voice_unavailable">Voice recognition is not available on this device.</string>
+    <string name="error_voice_timeout">Didn\'t catch that — please try again.</string>
+
+    <!-- Medical info strings -->
+    <string name="error_invalid_age">Please enter a valid age between 0 and 120.</string>
+    <string name="toast_medical_saved">Medical information saved.</string>
+    <string name="error_medical_save">Could not save: %1$s</string>
+
+    <!-- Community feed error strings (added with Firestore rules fix) -->
+    <string name="error_not_signed_in">You must be signed in to view the community feed.</string>
+    <string name="error_loading_feed">Could not load the feed: %1$s</string>
+
+</resources>
